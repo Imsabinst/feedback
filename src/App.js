@@ -13,7 +13,6 @@ class App extends React.Component {
       good: "good",
       neutral: "neutral",
       poor: "poor",
-      all: [],
     };
   }
 
