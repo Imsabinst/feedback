@@ -1,25 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      counter1: 0,
+      counter2: 0,
+      counter3: 0,
+      title: "Give Feedback",
+      result: "Statistics",
+      good: "good",
+      neutral: "neutral",
+      poor: "poor",
+      all: [],
+    };
+  }
+
+  good() {
+    this.setState({ counter1: this.state.counter1 + 1 });
+  }
+
+  neutral() {
+    this.setState({ counter2: this.state.counter2 + 1 });
+  }
+  poor() {
+    this.setState({ counter3: this.state.counter3 + 1 });
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <h2>{this.state.title}</h2>
+        </div>
+        <div>
+          <button onClick={this.good.bind(this)}>good</button>
+          <button onClick={this.neutral.bind(this)}>neutral</button>
+          <button onClick={this.poor.bind(this)}>poor</button>
+        </div>
+        <div>
+          <h2>{this.state.result}</h2>
+        </div>
+        <div>
+          {this.state.good}: {this.state.counter1}
+        </div>
+        <div>
+          {this.state.neutral}: {this.state.counter2}
+        </div>
+        <div>
+          {this.state.poor}: {this.state.counter3}
+        </div>
+      </div>
+    );
+  }
 }
-
 export default App;
