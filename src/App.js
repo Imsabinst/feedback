@@ -13,20 +13,37 @@ class App extends React.Component {
     };
   }
 
+  statistics(good, neutral, poor) {
+    let denominator = good + neutral + poor;
+    if (denominator === 0) {
+      return { countAvg: 0, countPos: 0 };
+    } else
+      return {
+        countAvg: (good - poor) / denominator,
+        countPos: (good * 100) / denominator,
+      };
+  }
+
   countAverage(good, neutral, poor) {
     let sum = good + neutral + poor;
-    let finalData = isNaN((good - poor) / sum) ? 0 : (good - poor) / sum;
-    return finalData;
+    let finalAvarage = isNaN((good - poor) / sum) ? 0 : (good - poor) / sum;
+    return finalAvarage;
   }
   countPositive(good, neutral, poor) {
     let sum = good + neutral + poor;
-    return (good * 100) / sum;
+    let finalPercentage = isNaN((good * 100) / sum) ? 100 : (good * 100) / sum;
+    return finalPercentage;
   }
 
   good() {
     this.setState({
       counterForGood: this.state.counterForGood + 1,
       countAvg: this.countAverage(
+        this.state.counterForGood,
+        this.state.counterForNeutral,
+        this.state.counterForPoor
+      ),
+      countPos: this.countPositive(
         this.state.counterForGood,
         this.state.counterForNeutral,
         this.state.counterForPoor
@@ -42,6 +59,11 @@ class App extends React.Component {
         this.state.counterForNeutral,
         this.state.counterForPoor
       ),
+      countPos: this.countPositive(
+        this.state.counterForGood,
+        this.state.counterForNeutral,
+        this.state.counterForPoor
+      ),
     });
   }
   poor() {
@@ -52,17 +74,12 @@ class App extends React.Component {
         this.state.counterForNeutral,
         this.state.counterForPoor
       ),
+      countPos: this.countPositive(
+        this.state.counterForGood,
+        this.state.counterForNeutral,
+        this.state.counterForPoor
+      ),
     });
-  }
-  statistics(good, neutral, poor) {
-    let denominator = good + neutral + poor;
-    if (denominator === 0) {
-      return { countAvg: 0, countPos: 0 };
-    } else
-      return {
-        countAvg: (good - poor) / denominator,
-        countPos: (good * 100) / denominator,
-      };
   }
 
   render() {
