@@ -13,17 +13,6 @@ class App extends React.Component {
     };
   }
 
-  statistics(good, neutral, poor) {
-    let denominator = good + neutral + poor;
-    if (denominator === 0) {
-      return { countAvg: 0, countPos: 0 };
-    } else
-      return {
-        countAvg: (good - poor) / denominator,
-        countPos: (good * 100) / denominator,
-      };
-  }
-
   countAverage(good, neutral, poor) {
     let sum = good + neutral + poor;
     let finalAvarage = isNaN((good - poor) / sum) ? 0 : (good - poor) / sum;
